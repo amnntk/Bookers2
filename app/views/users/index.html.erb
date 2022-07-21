@@ -1,0 +1,26 @@
+<%#.userの一覧%>
+
+<% if flash[:success] %>
+  <div class="flash">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+<%= render '/users/show', user: @user,book: @book %>
+
+<div class="col-md-8 offset-md-1">
+  　<h1>Users</h1>
+  <table class="table table-hover table-inverse">
+    <thead>
+      <th>image</th>
+      <th>name</th>
+    </thead>
+    <% @users.each do |f| %>
+    <tr>
+      <td><%= image_tag @user.get_profile_image(100,100) %></td>
+    
+      <td><%= f.name %></td>
+      <td><%=link_to "Show", user_path(f.id) %></td>
+      <% end %>
+    </tr>
+ </table>
+</div>

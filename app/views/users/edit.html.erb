@@ -1,0 +1,42 @@
+<%#.userの編集 %>
+
+<p id="notice"></p>
+<div class="container">
+  <div>
+   <% if @user.errors.any? %>
+   <h3>
+    <%= @user.errors.count %>errors prohibited this book from being saved:
+   </h3>
+    <% @user.errors.full_messages.each do |message| %>
+   <ul>
+    <li><%= message %></li>
+   </ul>
+    <% end %>
+   <% end %>
+  </div>
+
+  <div class="row">
+    <div class = "col-sm-8">
+     <h2>User info</h2>
+      <%= form_with model:@user do |f| %>
+       <div class="form-group">
+       <label for="user_name">Name</label>
+        <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"名前"%>
+       </div>
+
+       <div class="form-group">
+       <label for="user_image">Image</label>
+        <%#= image_tag @user.get_profile_image(100,100) %>
+        <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+       </div>
+       <div class="form-group">
+       <label for="user_introduction">Introduction</label>
+        <%= f.text_area :introduction, autofocus: true, class:"form-control", id:"inputEmail" %>
+       </div>
+       <div class="form-group">
+        <input type="submit" name="commit" value="Update User" class="btn btn-secondary" data-disable-with="Update User">
+       </div>
+      <% end %>
+
+    </div>
+   </div>
